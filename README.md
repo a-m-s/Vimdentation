@@ -10,15 +10,11 @@ The name is corny, but I couldn't think of anything else to call it, and Vim (as
 
 ## Installation
 
-Until I decide if this deserves to go on the Package Manager for Sublime Text, you will have to do things the old fashioned way. Vimdentation.py should go inside a folder in your Packages folder (I named mine Vimdentation as well). You will then need these keymaps in your Key Bindings - User file:
+Until I decide if this deserves to go on the Package Manager for Sublime Text, you will have to do things the old fashioned way:
 
 ```
-{ "keys": ["tab"], "command": "vim_tab_press", "context":
-    [
-        { "key": "auto_complete_visible", "operator": "equal", "operand": false }
-    ]
-},
-{ "keys": ["shift+tab"], "command": "vim_shift_tab_press" }
+cd /path/to/sublimetext/Packages
+git clone https://github.com/Wintaru/Vimdentation.git Vimdentation
 ```
 
 In my case, I also have the following in my Preferences.sublime-settings:

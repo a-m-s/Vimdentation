@@ -1,0 +1,8 @@
+[
+	{ "keys": ["tab"], "command": "vim_tab_press", "context":
+	    [
+		{ "key": "auto_complete_visible", "operator": "equal", "operand": false }
+	    ]
+	},
+	{ "keys": ["shift+tab"], "command": "vim_shift_tab_press" }
+]
