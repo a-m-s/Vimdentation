@@ -23,6 +23,8 @@ class VimTabPressCommand(sublime_plugin.TextCommand):
     """
     def run(self, edit):
         spaces = "    "
+        if self.view.settings().has("vimdentation_indent_size"):
+            spaces = " " * self.view.settings().get("vimdentation_indent_size")
         space_count = len(spaces)
         sel = self.view.sel()
         for region in sel:
@@ -52,6 +54,8 @@ class VimShiftTabPressCommand(sublime_plugin.TextCommand):
     """
     def run(self, edit):
         spaces = "    "
+        if self.view.settings().has("vimdentation_indent_size"):
+            spaces = " " * self.view.settings().get("vimdentation_indent_size")
         space_count = len(spaces)
         sel = self.view.sel()
         for region in sel:
