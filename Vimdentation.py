@@ -22,11 +22,23 @@ class VimTabPressCommand(sublime_plugin.TextCommand):
     4 spaces when tab is pressed.
     """
     def run(self, edit):
-        spaces = "    "
         if self.view.settings().has("vimdentation_indent_size"):
-            spaces = " " * self.view.settings().get("vimdentation_indent_size")
-        space_count = len(spaces)
+            indent_size = self.view.settings().get("vimdentation_indent_size")
+        tab_size = self.view.settings().get("tab_size")
         sel = self.view.sel()
+
+        def insert_indent(insert_point):
+            # insert spaces upto the next "indent stop" (like tab stop)
+            row, char_column = self.view.rowcol(insert_point)
+            real_column = 0
+            for i in range(insert_point - char_column, insert_point):
+            	if self.view.substr(i) == "\t":
+            	    real_column += tab_size - 1
+            	else:
+            	    real_column += 1
+            space_count = indent_size - (real_column % indent_size)
+            self.view.insert(edit, insert_point, " " * space_count)
+
         for region in sel:
             # If the region isn't empty it's selected text so
             # break out the lines in the selection and add the
@@ -35,12 +47,12 @@ class VimTabPressCommand(sublime_plugin.TextCommand):
                 selectedLines = self.view.lines(region)
                 i = 0
                 for l in selectedLines:
-                    self.view.insert(edit, l.begin() + i, spaces)
-                    i += space_count
+                    insert_indent(l.begin() + i)
+                    i += indent_size
             else:
                 # For those cases where nothing is selected, put the
                 # spaces whereever the cursor is.
-                self.view.insert(edit, region.begin(), spaces)
+                insert_indent(region.begin())
 
 class VimShiftTabPressCommand(sublime_plugin.TextCommand):
     """
