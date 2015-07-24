@@ -17,6 +17,15 @@ cd /path/to/sublimetext/Packages
 git clone https://github.com/Wintaru/Vimdentation.git Vimdentation
 ```
 
+## Configuration
+
+Two configuration options are available (default settings shown):
+
+```
+"vimdentation_indent_size": 4,
+"vimdentation_mixed_tabs": false,
+```
+
 In my case, I also have the following in my Preferences.sublime-settings:
 
 ```
@@ -25,6 +34,10 @@ In my case, I also have the following in my Preferences.sublime-settings:
 "tab_size": 8,
 "translate_tabs_to_spaces": true
 ```
+
+If "vimdentation_mixed_tabs" is set, then it probably makes sense to have
+"translate_tabs_to_spaces" set false.  In this case Vimdentation will insert
+spaces until "tab_size" spaces, and then convert those spaces to a hard tab.
 
 ## Improvements
 Please feel free to let me know if you find issues with this plugin. I'm not a python developer, this was cobbled together as a way for me to get my feet wet. I'm sure there are things that could be done better, and I'm also sure there are bugs to uncover. Thanks!
